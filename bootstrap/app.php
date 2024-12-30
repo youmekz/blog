@@ -11,7 +11,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+      $middleware->append([
+        \App\Http\Middleware\LogMiddleware::class,
+      ]);
+
+      //$middleware->remove(\Illuminate\Http\Middleware\ValidatePostSize::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
