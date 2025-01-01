@@ -3,6 +3,7 @@
 use App\Http\Controllers\Blog\CommentController;
 use App\Http\Controllers\Blog\PostController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
 
@@ -19,7 +20,7 @@ Route::view('/', 'index');
 
 Route::view('/test', 'test');
 
-Route::prefix('users')->group(function () {
+Route::prefix('users')->middleware(AdminMiddleware::class)->group(function () {
   Route::resource('/user', UserController::class);
 
   Route::resource('/posts', PostController::class);
